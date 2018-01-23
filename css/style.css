@@ -5,3 +5,7 @@ body{
 img {
   width: 250px;
 }
+
+canvas {
+  border: solid 1px red;
+}
