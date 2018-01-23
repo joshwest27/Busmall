@@ -4,6 +4,7 @@
 Photo.allPhotos = [];
 
 // global variable
+var totalClicks = 0;
 
 // constructor for the image objects
 function Photo(filepath, name){
@@ -73,6 +74,11 @@ function allRandomPhotos (){
   randomPhoto();
   randomPhoto2();
   randomPhoto3();
+  totalClicks++;
+  console.log(totalClicks);
+  if(totalClicks === 25){
+    alert('You have voted 25 times! Thanks for your input. ');
+  }
 }
 
 // invoke the callback on page load to show random photos
