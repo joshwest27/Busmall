@@ -76,12 +76,15 @@ function randomPhoto() {
   // condition 2: left is in lastDisplayed array
   // condition 3: right is in the lastDisplayed array
   // condition 4: center is in the lastDisplayed array
-  while(randomLeft === randomCenter || randomCenter === randomRight || randomRight === randomLeft || Photo.lastDisplayed.includes(randomLeft) || Photo.lastDisplayed.includes(randomCenter) || Photo.lastDisplayed.includes(randomRight)){
+
+  //  Photo.lastDisplayed.includes(randomLeft) || Photo.lastDisplayed.includes(randomCenter) || 
+  // Photo.lastDisplayed.includes(randomRight)
+
+  while(randomLeft === randomCenter || randomCenter === randomRight || randomRight === randomLeft){
     randomLeft = Math.floor(Math.random() * Photo.allPhotos.length);
     randomCenter = Math.floor(Math.random() * Photo.allPhotos.length);
     randomRight = Math.floor(Math.random() * Photo.allPhotos.length);
   }
-
   // use the random number to diaplay photos at the random index
   // imgEl.src = Photo.allPhotos[randomLeft].filepath;
   // img2El.src = Photo.allPhotos[randomCenter].filepath;
@@ -95,7 +98,6 @@ function randomPhoto() {
 
   img3El.src = Photo.allPhotos[randomRight].filepath;
   img3El.alt = Photo.allPhotos[randomRight].name;
-
 
   // increment the number when each photo
   Photo.allPhotos[randomLeft].timesOnScreen += 1;
@@ -113,6 +115,7 @@ function randomPhoto() {
 function handleClick(e){
   // track number of total clicks
   Photo.totalClicks += 1;
+  console.log(Photo.totalClicks);
 
   // count clicks on specific photo
   for(var i in Photo.allPhotos.length){
@@ -120,8 +123,7 @@ function handleClick(e){
       Photo.allPhotos[i].clicks += 1;
     }
   }
-
-  if(Photo.allPhotos > 9) {
+  if(Photo.totalClicks > 5) {
     sectionEl.removeEventListener('click', handleClick);
     showResults();
     updateVotes();
@@ -135,8 +137,8 @@ function handleClick(e){
 function showResults() {
   for(var i in Photo.allPhotos){
     var liEl = document.createElement('li');
-    liEl.textContent = Photo.allPhotos[i].name + 'has ' + Photo.allPhotos[i].clicks +
-    ' votes and was displayed ' + Photo.allPhotos[i].timesOnScreen + 'times.';
+    liEl.textContent = Photo.allPhotos[i].name + ' has ' + Photo.allPhotos[i].clicks +
+    ' votes and was displayed ' + Photo.allPhotos[i].timesOnScreen + ' times.';
     ulEl.appendChild(liEl);
   }
 }
@@ -150,8 +152,9 @@ function updateVotes() {
 
 // render chart
 function displayChart() {
-  var ctx = document.getElementById('chart-pics').msGetInputContext('2d');
-  var chartColors = ['#000000', '#111111', '#222222', '#333333'];
+  var ctx = document.getElementById('chart-pics').getContext('2d');
+  var chartColors = ['#EDF7F0', '#253E59', '#6D9ABC', '#C4DDED', '#AF6E4D', 
+    '#EDF7F0', '#253E59', '#6D9ABC', '#C4DDED', '#AF6E4D','#EDF7F0', '#253E59', '#6D9ABC', '#C4DDED', '#AF6E4D','#EDF7F0', '#253E59', '#6D9ABC', '#C4DDED', '#AF6E4D','#EDF7F0', '#253E59', '#6D9ABC', '#C4DDED', '#AF6E4D'];
 
   var photoChart = new Chart(ctx, {
     type: 'bar',
@@ -174,7 +177,6 @@ function displayChart() {
     }
   });
 }
-
 sectionEl.addEventListener('click', handleClick);
 
 // display 3 images on page
