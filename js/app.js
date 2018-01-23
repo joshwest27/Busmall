@@ -48,7 +48,6 @@ imgEl.addEventListener('click', allRandomPhotos);
 img2El.addEventListener('click', allRandomPhotos);
 img3El.addEventListener('click', allRandomPhotos);
 
-
 function allRandomPhotos (){
 // callback function to diaplay random image
   function randomPhoto() {
@@ -77,9 +76,10 @@ function allRandomPhotos (){
   randomPhoto();
   randomPhoto2();
   randomPhoto3();
+  totalClicks++;
   console.log(totalClicks);
   if(totalClicks === 25){
-    alert('You have voted 25 times! Thanks for your input. ');
+    alert("You have reached 25 clicks. Thank you for your input.");
   }
 }
 
