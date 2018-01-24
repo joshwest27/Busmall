@@ -9,7 +9,7 @@ Photo.totalClicks = 0;
 // track last displayed
 Photo.lastDisplayed = [];
 
-// access section element from the DOM  
+// access section element from the DOM
 var sectionEl = document.getElementById('all-pics');
 
 // access the ul element
@@ -158,7 +158,7 @@ function renderChart() {
   var chartColors = ['#EDF7F0', '#253E59', '#6D9ABC', '#C4DDED', '#AF6E4D',
     '#EDF7F0', '#253E59', '#6D9ABC', '#C4DDED', '#AF6E4D','#EDF7F0', '#253E59', '#6D9ABC', '#C4DDED', '#AF6E4D','#EDF7F0', '#253E59', '#6D9ABC', '#C4DDED', '#AF6E4D','#EDF7F0', '#253E59', '#6D9ABC', '#C4DDED', '#AF6E4D'];
 
-  var photoChart = new Chart(ctx, {
+  var photoChart = new Chart(ctx, {  //eslint-disable-line
     type: 'bar',
     data: {
       labels: photoNames,
