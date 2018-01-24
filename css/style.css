@@ -1,11 +1,25 @@
 body{
- width: 100%;
+ width: 99%;
+ background-color: #9DA9A0;
+}
+h1 {
+  font-family: 'Sedgwick Ave', cursive;
+  text-align: center;
 }
 
 img {
+  margin-left: 100px;
   width: 250px;
 }
-
-canvas {
-  border: solid 1px red;
+#all-pics{
+  background-color: white;
+}
+#results {
+  font-family: 'Kavivanar', cursive;
+}
+section, canvas {
+  padding: 5px;
+  width: 99%;
+  border: solid 2px black;
+  background-color: #DCD0C5;
 }
