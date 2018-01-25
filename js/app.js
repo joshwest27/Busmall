@@ -18,7 +18,7 @@ var ulEl = document.getElementById('results');
 // array to store names for chart labels
 var photoNames = [];
 
-// array to sore pic votes
+// array to store pic votes
 var picVotes = [];
 
 // constructor for the image objects
@@ -118,7 +118,7 @@ function randomPhoto() {
 function handleClick(e){
   // track number of total clicks
   Photo.totalClicks += 1;
-
+  console.log(Photo.totalClicks);
   // count clicks on specific photo
   for(var i in Photo.allPhotos) {
     if(e.target.alt === Photo.allPhotos[i].name) {
@@ -126,6 +126,7 @@ function handleClick(e){
     }
   }
   if(Photo.totalClicks === 25) {
+    alert("Thank you for voting. Here are your results.");
     sectionEl.removeEventListener('click', handleClick);
     showResults();
     updateVotes();
@@ -150,6 +151,18 @@ function updateVotes() {
   for(var i in Photo.allPhotos) {
     picVotes[i] = Photo.allPhotos[i].clicks;
   }
+  // adding to local storages
+  var addingVotes = [];
+
+  if(localStorage.totesVotes){
+    for(var j in picVotes){
+
+      addingVotes[j] = picVotes[j] + JSON.parse(localStorage.totesVotes)[j];
+    } 
+  } else {
+    addingVotes = picVotes;   
+  }
+  localStorage.totesVotes = JSON.stringify(addingVotes);
 }
 
 // render chart
@@ -164,7 +177,7 @@ function renderChart() {
       labels: photoNames,
       datasets: [{
         label: '# of votes',
-        data: picVotes,
+        data: JSON.parse(localStorage.totesVotes),
         backgroundColor: chartColors,
       }]
     },
@@ -183,4 +196,3 @@ sectionEl.addEventListener('click', handleClick);
 
 // display 3 images on page
 randomPhoto();
-
