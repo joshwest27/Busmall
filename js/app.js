@@ -58,12 +58,6 @@ var leftEl = document.getElementById('left');
 var centerEl = document.getElementById('center');
 var rightEl = document.getElementById('right');
 
-// add event listener
-// imgEl.addEventListener('click', randomPhoto);
-// img2El.addEventListener('click', randomPhoto);
-// img3El.addEventListener('click', randomPhoto);
-
-
 // callback function to diaplay random image
 function randomPhoto() {
   // random number generator to return a number between 0 and length of the array. (Photo.allPhotos)
@@ -77,18 +71,11 @@ function randomPhoto() {
   // condition 3: right is in the lastDisplayed array
   // condition 4: center is in the lastDisplayed array
 
-  //  Photo.lastDisplayed.includes(randomLeft) || Photo.lastDisplayed.includes(randomCenter) || 
-  // Photo.lastDisplayed.includes(randomRight)
-
   while(randomLeft === randomCenter || randomCenter === randomRight || randomRight === randomLeft || Photo.lastDisplayed.includes(randomLeft) || Photo.lastDisplayed.includes(randomCenter) || Photo.lastDisplayed.includes(randomRight)){
     randomLeft = Math.floor(Math.random() * Photo.allPhotos.length);
     randomCenter = Math.floor(Math.random() * Photo.allPhotos.length);
     randomRight = Math.floor(Math.random() * Photo.allPhotos.length);
   }
-  // use the random number to diaplay photos at the random index
-  // imgEl.src = Photo.allPhotos[randomLeft].filepath;
-  // img2El.src = Photo.allPhotos[randomCenter].filepath;
-  // img3El.src = Photo.allPhotos[randomRight].filepath;
 
   leftEl.src = Photo.allPhotos[randomLeft].filepath;
   leftEl.alt = Photo.allPhotos[randomLeft].name;
@@ -103,11 +90,6 @@ function randomPhoto() {
   Photo.allPhotos[randomLeft].timesOnScreen += 1;
   Photo.allPhotos[randomCenter].timesOnScreen += 1;
   Photo.allPhotos[randomRight].timesOnScreen += 1;
-
-  // // approach 1
-  // Photo.lastDisplayed.push(randomLeft);
-  // Photo.lastDisplayed.push(randomCenter);
-  // Photo.lastDisplayed.push(randomRight);
 
   // approach 2
   Photo.lastDisplayed[0] = randomLeft;
