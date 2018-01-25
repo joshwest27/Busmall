@@ -10,6 +10,7 @@ h1 {
 img {
   margin-left: 100px;
   width: 250px;
+  border: solid 2px black;
 }
 #all-pics{
   background-color: white;
