@@ -11,7 +11,7 @@ Photo.lastDisplayed = [];
 
 // access section element from the DOM
 var sectionEl = document.getElementById('all-pics');
-
+var imgEl = document.getElementById('left', 'center', 'right');
 // access the ul element
 var ulEl = document.getElementById('results');
 
@@ -77,7 +77,7 @@ function randomPhoto() {
   // condition 3: right is in the lastDisplayed array
   // condition 4: center is in the lastDisplayed array
 
-  //  Photo.lastDisplayed.includes(randomLeft) || Photo.lastDisplayed.includes(randomCenter) || 
+  //  Photo.lastDisplayed.includes(randomLeft) || Photo.lastDisplayed.includes(randomCenter) ||
   // Photo.lastDisplayed.includes(randomRight)
 
   while(randomLeft === randomCenter || randomCenter === randomRight || randomRight === randomLeft || Photo.lastDisplayed.includes(randomLeft) || Photo.lastDisplayed.includes(randomCenter) || Photo.lastDisplayed.includes(randomRight)){
