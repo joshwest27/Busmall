@@ -18,7 +18,7 @@ var ulEl = document.getElementById('results');
 // array to store names for chart labels
 var photoNames = [];
 
-// array to sore pic votes
+// array to store pic votes
 var picVotes = [];
 
 // constructor for the image objects
@@ -58,12 +58,6 @@ var leftEl = document.getElementById('left');
 var centerEl = document.getElementById('center');
 var rightEl = document.getElementById('right');
 
-// add event listener
-// imgEl.addEventListener('click', randomPhoto);
-// img2El.addEventListener('click', randomPhoto);
-// img3El.addEventListener('click', randomPhoto);
-
-
 // callback function to diaplay random image
 function randomPhoto() {
   // random number generator to return a number between 0 and length of the array. (Photo.allPhotos)
@@ -77,18 +71,17 @@ function randomPhoto() {
   // condition 3: right is in the lastDisplayed array
   // condition 4: center is in the lastDisplayed array
 
+<<<<<<< HEAD
   //  Photo.lastDisplayed.includes(randomLeft) || Photo.lastDisplayed.includes(randomCenter) ||
   // Photo.lastDisplayed.includes(randomRight)
 
+=======
+>>>>>>> 75c4a5117809a98e432f76c0c787f3cf844865ad
   while(randomLeft === randomCenter || randomCenter === randomRight || randomRight === randomLeft || Photo.lastDisplayed.includes(randomLeft) || Photo.lastDisplayed.includes(randomCenter) || Photo.lastDisplayed.includes(randomRight)){
     randomLeft = Math.floor(Math.random() * Photo.allPhotos.length);
     randomCenter = Math.floor(Math.random() * Photo.allPhotos.length);
     randomRight = Math.floor(Math.random() * Photo.allPhotos.length);
   }
-  // use the random number to diaplay photos at the random index
-  // imgEl.src = Photo.allPhotos[randomLeft].filepath;
-  // img2El.src = Photo.allPhotos[randomCenter].filepath;
-  // img3El.src = Photo.allPhotos[randomRight].filepath;
 
   leftEl.src = Photo.allPhotos[randomLeft].filepath;
   leftEl.alt = Photo.allPhotos[randomLeft].name;
@@ -104,11 +97,6 @@ function randomPhoto() {
   Photo.allPhotos[randomCenter].timesOnScreen += 1;
   Photo.allPhotos[randomRight].timesOnScreen += 1;
 
-  // // approach 1
-  // Photo.lastDisplayed.push(randomLeft);
-  // Photo.lastDisplayed.push(randomCenter);
-  // Photo.lastDisplayed.push(randomRight);
-
   // approach 2
   Photo.lastDisplayed[0] = randomLeft;
   Photo.lastDisplayed[1] = randomCenter;
@@ -118,7 +106,7 @@ function randomPhoto() {
 function handleClick(e){
   // track number of total clicks
   Photo.totalClicks += 1;
-
+  console.log(Photo.totalClicks);
   // count clicks on specific photo
   for(var i in Photo.allPhotos) {
     if(e.target.alt === Photo.allPhotos[i].name) {
@@ -126,6 +114,7 @@ function handleClick(e){
     }
   }
   if(Photo.totalClicks === 25) {
+    alert("Thank you for voting. Here are your results.");
     sectionEl.removeEventListener('click', handleClick);
     showResults();
     updateVotes();
@@ -150,6 +139,18 @@ function updateVotes() {
   for(var i in Photo.allPhotos) {
     picVotes[i] = Photo.allPhotos[i].clicks;
   }
+  // adding to local storages
+  var addingVotes = [];
+
+  if(localStorage.totesVotes){
+    for(var j in picVotes){
+
+      addingVotes[j] = picVotes[j] + JSON.parse(localStorage.totesVotes)[j];
+    } 
+  } else {
+    addingVotes = picVotes;   
+  }
+  localStorage.totesVotes = JSON.stringify(addingVotes);
 }
 
 // render chart
@@ -164,7 +165,7 @@ function renderChart() {
       labels: photoNames,
       datasets: [{
         label: '# of votes',
-        data: picVotes,
+        data: JSON.parse(localStorage.totesVotes),
         backgroundColor: chartColors,
       }]
     },
@@ -183,4 +184,3 @@ sectionEl.addEventListener('click', handleClick);
 
 // display 3 images on page
 randomPhoto();
-
